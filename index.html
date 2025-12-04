@@ -1,25 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Seattle Housing</title>
-    <link rel="stylesheet" href="css/main.css">
-     <link rel="icon" type="image/x-icon" href="assets/favi.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="UTF-8">
+	<title>Seattle Housing Map</title>
+	<link rel="icon" type="image/x-icon" href="assets/favi.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="" rel="stylesheet"> // for now, mapbox link
+	<script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
-    <div class="topnav" id="myTopnav">
-        <a class="active" href="index.html"></a>
-        <a href="about.html"></a>
-        <a href="team.html"></a>
-
-        <a href="javascript:void(0);" class="icon">
-            <i class="fa fa-bars"></i>
-        </a>
+	<div class="topnav" id="navbar">
+    <div class="nav-left">
+			<a href="index.html" class="logo">
+				<img src="assets/favi.png" class="logo-img" alt="Purple House Logo">
+				Seattle Housing Map
+			</a>
     </div>
 
-    <div class="content">
+    <div class="nav-right">
+			<a class="active" href="index.html">Home</a>
+			<a href="about.html">About</a>
+			<a href="team.html">Team</a>
+			<a href="javascript:void(0);" class="icon" onclick="toggleNav()">
+				<i class="fa fa-bars"></i>
+			</a>
     </div>
-    <script src="js/main.js"></script>
+	</div>
+
+	<div id="sidebar">
+		<div id="menu">
+			<div class="menu-header">
+					<h2>Filters</h2>
+					<button id="help-button">?</button>
+			</div>
+			<p>Select filters to highlight neighborhoods that fit your budget and preferences.</p>
+
+			<div id="filter-btns">
+				<button class="btn">Price Range</button>
+				<button class="btn">Transit Access</button>
+				<button class="btn">Low Crime</button>
+				<button class="btn">Grocery Nearby</button>
+			</div>
+
+			<h3>Legend</h3>
+			<div id="legend">
+				<div class="legend-item">
+					<span class="legend-color purple"></span> Affordable Housing
+				</div>
+
+				<div class="legend-item">
+					<span class="legend-color black"></span> High Crime Areas
+				</div>
+
+				<div class="legend-item">
+					<span class="legend-color gray"></span> Transit Stops
+				</div>
+			</div>
+		</div>
+
+		<div id="map"></div>
+	</div>
+
+	<div id="popup">
+		<div id="popup-wrapper">
+			<div id="tutorialContent">
+				<button id="tutorialClose">X</button>
+				<h2>Welcome!</h2>
+				<p>Use the side menu to filter neighborhoods and view details on the map.</p>
+			</div>
+		</div>
+	</div>
+	<script src="js/main.js"></script>
 </body>
 </html>

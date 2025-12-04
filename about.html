@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>About Seattle Housing Map</title>
+	<link rel="icon" type="image/x-icon" href="assets/favi.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+	<div class="topnav" id="myTopnav">
+    <div class="nav-left">
+			<a href="index.html" class="logo">
+				<img src="assets/favi.png" class="logo-img" alt="Purple House Logo">
+				Seattle Housing Map
+			</a>
+    </div>
+
+    <div class="nav-right">
+			<a href="index.html">Home</a>
+			<a class="active" href="about.html">About</a>
+			<a href="team.html">Team</a>
+			<a href="javascript:void(0);" class="icon" onclick="toggleNav()">
+				<i class="fa fa-bars"></i>
+			</a>
+    </div>
+	</div>
+
+	<div id="content-wrapper">
+		<div class="content-section">
+			<h1>About the Seattle Housing Map</h1>
+			<p>
+				This interactive web GIS application helps users explore affordable housing options near the University
+				of Washington and surrounding Seattle neighborhoods. The map combines multiple data layers to visualize 
+				housing affordability, rent prices, neighborhood safety, and transit accessibility. Users can interact 
+				with the map using filters, pop-ups, and sidebar charts to make informed housing decisions.
+			</p>
+
+			<h2>Project Goals</h2>
+			<ul>
+				<li>Provide an interactive tool for exploring housing affordability near UW and Seattle.</li>
+				<li>Visualize key metrics such as rent prices, crime density, and transit proximity.</li>
+				<li>Allow users to filter neighborhoods by price, safety, and accessibility.</li>
+				<li>Encourage informed decision-making for students and young professionals looking for housing in the Greater-Seattle Area.</li>
+			</ul>
+
+			<h2>Data Sources</h2>
+			<ul>
+				<li>Apartment Market Rent Prices – U.S. Census Tract level</li>
+				<li>Seattle Police Department Crime Data</li>
+				<li>Seattle Transit Stops & Walksheds</li>
+				<li>Housing Tenure & Costs – Seattle Neighborhoods</li>
+			</ul>
+
+			<h2>Important Notes</h2>
+			<p>
+				Please note that crime data reflects reported incidents over the last five years.
+				Not all incidents are reported, and patterns may be influenced by policing practices,
+				neighborhood demographics, and other systemic factors.
+			</p>
+		</div>
+	</div>
+
+	<script src="js/main.js"></script>
+</body>
+
+</html>
