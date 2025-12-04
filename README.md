@@ -69,11 +69,12 @@ Special thanks to the GEOG 328 instructors and TAs for guidance throughout the p
 ---
 
 ## AI Usage Disclosure
-ChatGPT was used to help refine the README structure, phrasing, and clarity. All data processing, code implementation, and analysis were performed by the project team.  
+ChatGPT was used to produce the favicon for this project. It was also used to help refine the README markdown structure. All code and data processing performed by the group.
 
 ---
 
 ## Other Notes
 - The map is designed to work on most desktop and laptop screens
 - Future improvements may include user accounts, bookmarking favorite neighborhoods, and additional interactive filters for amenities.
+- Limitation: This data reflects reported crimes in Seattle over the last five years. Not all incidents are reported, and patterns may be influenced by policing practices, neighborhood demographics, and other systemic factors.
 
