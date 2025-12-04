@@ -124,6 +124,10 @@ body {
 	background: #6c6c6c; 
 }
 
+.legend-color.mha {
+    background: #8e44ad; 
+}
+
 /* QUESTION MARK BUTTON */
 #help-button {
 	border-radius: 50%;
