@@ -23,15 +23,15 @@ tutorialClose.addEventListener("click", () => {
 
 
 // for maps
-mapboxgl.accessToken = ''; // add token later
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3JpZGFuZyIsImEiOiJjbWhib3YwM3cxYmM0Mmxwdm00MmpubjdnIn0.A_2GT3PB5OEdbL9HLwlubQ'; // add token later
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
+    style: 'mapbox://styles/kridang/cmir3vpns001401r78lo46x97', // custom style
     center: [-122.3035, 47.6553],
-    zoom: 12
+    zoom: 10
 });
-// for mha
 
+// for mha
 map.on('load', () => {
 
     map.addSource('mha-zones', {

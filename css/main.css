@@ -46,8 +46,8 @@ body {
 
 /* SIDEBAR AND MAP */
 #sidebar {
-	display: flex;
-	height: 100vh;
+    display: flex;
+    height: 100vh;   
 	align-items: flex-start;
 }
 
@@ -55,9 +55,14 @@ body {
 	width: 280px;
 	background: #fff;
 	padding: 20px;
+	overflow-y: auto;
 	border-right: 2px solid #ddd;
 	box-sizing: border-box;
-	overflow-y: auto;
+}
+
+#map {
+    flex-grow: 1;
+    height: 100vh;
 }
 
 .menu-header {
@@ -68,10 +73,6 @@ body {
 
 #menu h2 {
 	margin: 0;
-}
-
-#map {
-	flex-grow: 1;
 }
 
 /* FILTER */
