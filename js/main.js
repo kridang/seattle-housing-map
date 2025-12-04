@@ -30,3 +30,24 @@ const map = new mapboxgl.Map({
     center: [-122.3035, 47.6553],
     zoom: 12
 });
+// for mha
+
+map.on('load', () => {
+
+    map.addSource('mha-zones', {
+        type: 'geojson',
+        data: 'assets/mha_zones_cleaned.geojson'   
+    });
+
+    map.addLayer({
+        id: 'mha-fill',
+        type: 'fill',
+        source: 'mha-zones',
+        paint: {
+            'fill-color': '#f7c6d9',   
+            'fill-opacity': 0.40,
+            'fill-outline-color': '#d48aa3'  
+        }
+    });
+
+});
