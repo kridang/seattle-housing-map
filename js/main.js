@@ -166,6 +166,8 @@ map.on('load', async () => {
                 }
             ]
         });
+		map.setLayoutProperty("lines-layer", "visibility", "visible");
+
 
         new mapboxgl.Popup()
             .setLngLat(busCoords)
@@ -187,8 +189,13 @@ map.on('load', async () => {
     const current = map.getLayoutProperty("transit-layer", "visibility");
     const newVisibility = current === "none" ? "visible" : "none";
     map.setLayoutProperty("transit-layer", "visibility", newVisibility);
-		map.setLayoutProperty("lines-source", "visibility", newVisibility);
+	if (newVisibility === "none") hideRouteLine();
+
 	});
+
+	function hideRouteLine() {
+    	map.setLayoutProperty("lines-layer", "visibility", "none");
+	}	
 
 	// Crime data cluster 
 	map.addSource('crime', {
@@ -317,6 +324,7 @@ map.on('load', async () => {
     id: 'lines-layer',
     type: 'line',
     source: 'lines-source',
+    layout: { visibility: 'none' },
     paint: { 'line-width': 3, 'line-color': 'black' }
 	});
 
@@ -355,11 +363,12 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("transitBtn").addEventListener("click", () => {
-				const uw = map.getLayoutProperty("uw-campus-layer", "visibility");	
+		const uw = map.getLayoutProperty("uw-campus-layer", "visibility");	
         const lightrail = map.getLayoutProperty("lightrail-layer", "visibility");
         const newVisibility = lightrail === "none" ? "visible" : "none";
-				const newUWVisibility = uw === "none" ? "visible" : "none";
+		const newUWVisibility = uw === "none" ? "visible" : "none";
         map.setLayoutProperty("lightrail-layer", "visibility", newVisibility);
-				map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);
+		map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);
+		if (newVisibility === "none") hideRouteLine();
     });
 });
