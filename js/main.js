@@ -116,6 +116,92 @@ map.on('load', async () => {
 		map.setLayoutProperty("lines-source", "visibility", newVisibility);
 	});
 
+	// Crime data cluster 
+	map.addSource('crime', {
+    	type: 'geojson',
+    	data: 'data/spd_2025.geojson',
+    	cluster: true,
+    	clusterMaxZoom: 14,
+    	clusterRadius: 40
+	});
+
+	map.addLayer({
+    	id: 'crime-clusters',
+    	type: 'circle',
+    	source: 'crime',
+    	filter: ['has', 'point_count'],
+    	paint: {
+        	'circle-color': [
+            	'step',
+            	['get', 'point_count'],
+            	'lightblue',   
+            	50, 'teal',  
+            	100, 'yellow', 
+				200, 'orange',
+				400, 'red'
+        	],
+        	'circle-radius': [
+            	'step',
+            	['get', 'point_count'],
+            	15,
+            	50, 20,
+            	100, 28,
+				200, 34,
+				400, 40
+        	]
+    	}
+	});
+
+	map.addLayer({
+    	id: 'crime-cluster-count',
+    	type: 'symbol',
+    	source: 'crime',
+    	filter: ['has', 'point_count'],
+    	layout: {
+     		'text-field': '{point_count_abbreviated}',
+        	'text-size': 12
+    	}
+	});
+
+	map.addLayer({
+    	id: 'crime-unclustered',
+    	type: 'circle',
+    	source: 'crime',
+    	filter: ['!', ['has', 'point_count']],
+    	paint: {
+        	'circle-color': 'black',
+        	'circle-radius': 5,
+        	'circle-stroke-width': 1,
+        	'circle-stroke-color': 'white'
+    	}
+	});
+
+	map.on('click', 'crime-clusters', (e) => {
+    	const features = map.queryRenderedFeatures(e.point, {
+        	layers: ['crime-clusters']
+    	});
+
+    	const clusterId = features[0].properties.cluster_id;
+
+    	map.getSource('crime').getClusterExpansionZoom(clusterId, (err, zoom) => {
+        	if (err) return;
+        	map.easeTo({
+            	center: features[0].geometry.coordinates,
+            	zoom: zoom
+        	});
+    	});
+	});
+
+	document.getElementById("crimeBtn").addEventListener("click", () => {
+    	const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
+
+    	layers.forEach(layer => {
+        	const current = map.getLayoutProperty(layer, 'visibility');
+        	const newVis = current === 'none' ? 'visible' : 'none';
+        	map.setLayoutProperty(layer, 'visibility', newVis);
+    	});
+	});
+	
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
 	const lightrail = await lightrailResp.json();
