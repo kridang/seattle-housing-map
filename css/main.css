@@ -138,49 +138,11 @@ body {
 }
 
 .legend-color.gray { 
-	background: #6c6c6c; 
+	background: #919090; 
 }
 
 .legend-color.mha {
     background: #f7c6d9; 
-}
-
-/* QUESTION MARK BUTTON */
-/* #help-button {
-	border-radius: 50%;
-	width: 28px;
-	height: 28px;
-	cursor: pointer;
-} */
-
-#popup {
-	position: fixed;
-	inset: 0;
-	background: rgba(0,0,0,0.55);
-	display: none;
-	justify-content: center;
-	align-items: center;
-	z-index: 999;
-}
-#popup.visible {
-	display: flex;
-}
-
-#popup-wrapper {
-	background: #fff;
-	padding: 20px;
-	border-radius: 10px;
-	width: 360px;
-}
-
-#tutorialClose {
-	position: absolute;
-	top: 8px;
-	right: 12px;
-	background: none;
-	border: none;
-	font-size: 20px;
-	cursor: pointer;
 }
 
 /* ABOUT PAGE */

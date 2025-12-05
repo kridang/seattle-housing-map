@@ -40,13 +40,13 @@
 		<div id="menu">
 			<div class="menu-header">
 					<h2>Welcome!</h2>
-					<!-- <button id="help-button">?</button> -->
 			</div>
 			<p>Use the filters to find neighborhoods that fit your preferences.</p>
 
 			<div id="filter-btns">
 				<button class="btn">Price Range</button>
-				<button class="btn" id="transitBtn">Transit Access</button>
+				<button class="btn" id="busBtn">Bus Stops</button>
+				<button class="btn" id="transitBtn">Link Access</button>
 				<button class="btn">Crime</button>
 				<button class="btn" id="mhaBtn">MHA Zones</button>
 				<!-- <button class="btn" id="isoBtn">UW Commute Time</button> -->
@@ -74,7 +74,7 @@
     				<span class="legend-color mha"></span> MHA Zone
 			    </div>
 				<div class="legend-item">
-					<span class="legend-color" style="background-color: blue;"></span> Light Rail Stations
+					<span class="legend-color" style="background-color: yellow;"></span> Light Rail Stations
 				</div>
 				<div class="legend-item">
 					<span class="legend-color" style="background-color: purple;"></span> UW Campus
@@ -83,16 +83,6 @@
 		</div>
 
 		<div id="map"></div>
-	</div>
-
-	<div id="popup">
-		<div id="popup-wrapper">
-			<div id="tutorialContent">
-				<button id="tutorialClose">X</button>
-				<h2>Welcome!</h2>
-				<p>Use the side menu to filter neighborhoods and view details on the map.</p>
-			</div>
-		</div>
 	</div>
 	<script src="js/main.js"></script>
 </body>
