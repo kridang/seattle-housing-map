@@ -54,11 +54,6 @@ map.on('load', async () => {
     	map.setLayoutProperty("mha-fill", "visibility", newVis);
 	});
 
-	document.getElementById("mhaBtn").addEventListener("click", () => {
-			const current = map.getLayoutProperty("mha-fill", "visibility");
-			const newVisibility = current === "none" ? "visible" : "none";
-			map.setLayoutProperty("mha-fill", "visibility", newVisibility);
-  });
 
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
