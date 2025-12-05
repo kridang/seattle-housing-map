@@ -30,30 +30,29 @@ const map = new mapboxgl.Map({
     zoom: 12	
 });
 
-map.addSource('mha-zones', {
-    type: 'geojson',
-    data: 'data/mha_clean.geojson'
-});
+map.on('load', async () => {
+	// for mha
+	map.addSource('mha-zones', {
+		type: 'geojson',
+		data: 'data/mha_clean.geojson'   
+	});
 
-map.addLayer({
-    id: 'mha-fill',
-    type: 'fill',
-    source: 'mha-zones',
-    paint: {
-        'fill-color': '#f7c6d9',
-        'fill-opacity': 0.40,
-        'fill-outline-color': '#d48aa3'
-    },
-    layout: { visibility: 'visible' }
-});
+	map.addLayer({
+		id: 'mha-fill',
+		type: 'fill',
+		source: 'mha-zones',
+		paint: {
+			'fill-color': '#f7c6d9',   
+			'fill-opacity': 0.40,
+			'fill-outline-color': '#d48aa3'  
+		}
+	});
 
-document.getElementById("mhaBtn").addEventListener("click", () => {
-    const current = map.getLayoutProperty("mha-fill", "visibility");
-    const newVis = current === "none" ? "visible" : "none";
-    map.setLayoutProperty("mha-fill", "visibility", newVis);
-});
-
-
+	document.getElementById("mhaBtn").addEventListener("click", () => {
+			const current = map.getLayoutProperty("mha-fill", "visibility");
+			const newVis = current === "none" ? "visible" : "none";
+			map.setLayoutProperty("mha-fill", "visibility", newVis);
+  });
 
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
@@ -143,5 +142,7 @@ document.getElementById("mhaBtn").addEventListener("click", () => {
 				map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);	
     });
 });
+
+
 
 
