@@ -8,17 +8,19 @@ function toggleNav() {
     }
 }
 
-// for maps
-mapboxgl.accessToken = 'pk.eyJ1Ijoia3JpZGFuZyIsImEiOiJjbWhib3YwM3cxYmM0Mmxwdm00MmpubjdnIn0.A_2GT3PB5OEdbL9HLwlubQ'; // add token later
+//for maps
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3JpZGFuZyIsImEiOiJjbWhib3YwM3cxYmM0Mmxwdm00MmpubjdnIn0.A_2GT3PB5OEdbL9HLwlubQ';
+
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/kridang/cmir3vpns001401r78lo46x97', // custom style
+    style: 'mapbox://styles/kridang/cmir3vpns001401r78lo46x97',
     center: [-122.31, 47.669],
-    zoom: 12	
+    zoom: 12
 });
 
 map.on('load', async () => {
-	//for rent
+
+    //for rent
     map.addSource('housing', {
         type: 'geojson',
         data: 'data/2024_merged.geojson'
@@ -89,8 +91,8 @@ map.on('load', async () => {
             map.setLayoutProperty(layer, "visibility", newVis);
         });
     });
-	
-	// for mha
+
+   // for mha
 	map.addSource('mha-zones', {
 		type: 'geojson',
 		data: 'data/mha_clean.geojson'   
@@ -361,7 +363,3 @@ map.on('load', async () => {
 				map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);
     });
 });
-
-
-
-
