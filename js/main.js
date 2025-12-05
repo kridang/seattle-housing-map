@@ -18,6 +18,78 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', async () => {
+	//for rent
+    map.addSource('housing', {
+        type: 'geojson',
+        data: 'data/2024_merged.geojson'
+    });
+
+    map.addLayer({
+        id: 'housing-fill',
+        type: 'fill',
+        source: 'housing',
+        paint: {
+            'fill-color': [
+                'match',
+                ['get', 'Cost Category'],
+                'Low', '#6BCB77',
+                'Medium', '#FFD93D',
+                'High', '#FF6B6B',
+                '#cccccc'
+            ],
+            'fill-opacity': 0.65
+        }
+    });
+
+    map.addLayer({
+        id: 'housing-outline',
+        type: 'line',
+        source: 'housing',
+        paint: {
+            'line-color': '#000',
+            'line-width': 1
+        }
+    });
+
+    //hover
+    const rentPopup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
+
+    map.on('mousemove', 'housing-fill', (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+
+        const props = e.features[0].properties;
+
+        const name = props['Community Reporting Area Name'] || 'Area';
+        const medianRent = props['Median Rent'] || 'N/A';
+        const rentChange = props['Rent Change'] || 'N/A';
+
+        rentPopup
+            .setLngLat(e.lngLat)
+            .setHTML(`
+                <strong>${name}</strong><br>
+                <strong>Median Rent:</strong> $${medianRent}<br>
+                <strong>Rent Change:</strong> ${rentChange}
+            `)
+            .addTo(map);
+    });
+
+    map.on('mouseleave', 'housing-fill', () => {
+        map.getCanvas().style.cursor = '';
+        rentPopup.remove();
+    });
+
+    document.getElementById("priceBtn").addEventListener("click", () => {
+        const layers = ['housing-fill', 'housing-outline'];
+        layers.forEach(layer => {
+            const current = map.getLayoutProperty(layer, "visibility");
+            const newVis = current === "none" ? "visible" : "none";
+            map.setLayoutProperty(layer, "visibility", newVis);
+        });
+    });
+	
 	// for mha
 	map.addSource('mha-zones', {
 		type: 'geojson',
