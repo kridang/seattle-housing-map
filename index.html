@@ -7,6 +7,9 @@
 	<link rel="icon" type="image/x-icon" href="assets/favi.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+
 	<link href="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.16.0/mapbox-gl.js"></script>
 	<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
@@ -36,23 +39,28 @@
 	<div id="sidebar">
 		<div id="menu">
 			<div class="menu-header">
-					<h2>Filters</h2>
-					<button id="help-button">?</button>
+					<h2>Welcome!</h2>
+					<!-- <button id="help-button">?</button> -->
 			</div>
-			<p>Select filters to highlight neighborhoods that fit your budget and preferences.</p>
+			<p>Use the filters to find neighborhoods that fit your preferences.</p>
 
 			<div id="filter-btns">
 				<button class="btn">Price Range</button>
-				<button class="btn">Transit Access</button>
+				<button class="btn" id="transitBtn">Transit Access</button>
 				<button class="btn">Crime</button>
 				<button class="btn" id="mhaBtn">MHA Zones</button>
-				<button class="btn" id="isoBtn">UW Commute Time</button>
+				<!-- <button class="btn" id="isoBtn">UW Commute Time</button> -->
 			</div>
 
 			<h3>Legend</h3>
 			<div id="legend">
 				<div class="legend-item">
-					<span class="legend-color purple"></span> Affordable Housing
+					<h4>Housing Price Categories</h4>
+					<div class="sub-legend">
+						<div><span class="legend-color green"></span> Low</div>
+						<div><span class="legend-color yellow"></span> Medium</div>
+						<div><span class="legend-color red"></span> High</div>
+					</div>
 				</div>
 
 				<div class="legend-item">
@@ -65,6 +73,12 @@
 				<div class="legend-item">
     				<span class="legend-color mha"></span> MHA Zone
 			    </div>
+				<div class="legend-item">
+					<span class="legend-color" style="background-color: blue;"></span> Light Rail Stations
+				</div>
+				<div class="legend-item">
+					<span class="legend-color" style="background-color: purple;"></span> UW Campus
+				</div>
 			</div>
 		</div>
 

@@ -9,13 +9,13 @@ function toggleNav() {
 }
 
 // query popup
-const helpBtn = document.getElementById("help-button");
+// const helpBtn = document.getElementById("help-button");
 const popup = document.getElementById("popup");
 const tutorialClose = document.getElementById("tutorialClose");
 
-helpBtn.addEventListener("click", () => {
-    popup.classList.add("visible");
-});
+// helpBtn.addEventListener("click", () => {
+//     popup.classList.add("visible");
+// });
 
 tutorialClose.addEventListener("click", () => {
     popup.classList.remove("visible");
@@ -26,47 +26,11 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoia3JpZGFuZyIsImEiOiJjbWhib3YwM3cxYmM0Mmxwdm00M
 const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/kridang/cmir3vpns001401r78lo46x97', // custom style
-    center: [-122.3035, 47.6553],
-    zoom: 12
+    center: [-122.31, 47.669],
+    zoom: 12	
 });
 
-// const uwLon = -122.3080;
-// const uwLat = 47.6536;
-
-// const isoUrlBase = "https://api.mapbox.com/isochrone/v1/mapbox/";
-// let isoVisible = false;
-
-// async function getIso() {
-//   const query = await fetch(
-//     `${urlBase}${profile}/${lon},${lat}?contours_minutes=${minutes}&polygons=true&access_token=${mapboxgl.accessToken}`,
-//     { method: 'GET' }
-//   );
-//   const data = await query.json();
-//   console.log(data);
-// }
-
 map.on('load', async () => {
-	// isochrone source
-	// map.addSource("uw-isochrones", {
-	// 		type: "geojson",
-	// 		data: { type: "FeatureCollection", features: [] }
-	// });
-
-	// for isochrone
-	// map.addLayer(
-  //   {
-  //     id: 'isoLayer',
-  //     type: 'fill',
-  //     source: 'iso',
-  //     layout: {},
-  //     paint: {
-  //       'fill-color': '#5a3fc0',
-  //       'fill-opacity': 0.3
-  //     }
-  //   },
-  //   'poi-label'
-  // );
-
 	// for mha
 	map.addSource('mha-zones', {
 		type: 'geojson',
@@ -90,26 +54,93 @@ map.on('load', async () => {
 			map.setLayoutProperty("mha-fill", "visibility", newVisibility);
   });
 
-	// getIso();
-	// map.getSource('iso').setData(data);
+	// for lightrail
+	const lightrailResp = await fetch('data/clean_lightrail.geojson');
+	const lightrail = await lightrailResp.json();
 
-	// isochrone button
-	// const isoBtn = document.getElementById("isoBtn");
-	// isoBtn.addEventListener("click", async () => {
-	// 		isoVisible = !isoVisible;
+	map.addSource('lightrail', { type: 'geojson', data: lightrail });
+	map.addLayer({
+		id: 'lightrail-layer',
+		type: 'circle',
+		source: 'lightrail',
+		paint: {
+				'circle-radius': 8,
+				'circle-color': 'blue',
+				'circle-stroke-width': 2,
+				'circle-stroke-color': 'white'
+		}
+	});
 
-	// 		if (isoVisible) {
-	// 				const isoData = await getIsochrones();
-	// 				map.getSource("uw-isochrones").setData(isoData);
-	// 				isoBtn.classList.add("active-btn");
-	// 		} else {
-	// 				map.getSource("uw-isochrones").setData({
-	// 						type: "FeatureCollection",
-	// 						features: []
-	// 				});
-	// 				isoBtn.classList.remove("active-btn");
-	// 		}
-	// });
+	const uwCampus = {
+    type: "Feature",
+    geometry: { type: "Point", coordinates: [-122.303, 47.655] },
+    properties: { name: "University of Washington" }
+	};
+
+	map.addSource('uw-campus', { type: 'geojson', data: uwCampus });
+	map.addLayer({
+    id: 'uw-campus-layer',
+    type: 'circle',
+    source: 'uw-campus',
+    paint: {
+			'circle-radius': 12,
+			'circle-color': 'purple',
+			'circle-stroke-width': 2,
+			'circle-stroke-color': 'white'
+    }
+	});
+
+	map.addSource('lines-source', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+	map.addLayer({
+    id: 'lines-layer',
+    type: 'line',
+    source: 'lines-source',
+    paint: { 'line-width': 3, 'line-color': 'black' }
+	});
+
+	map.on('click', 'lightrail-layer', async (e) => {
+    const station = e.features[0];
+
+    const start = station.geometry.coordinates;
+    const end = [-122.303, 47.655]; // UW Campus PT!
+		
+		// From Turf
+    const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
+
+    try {
+			const response = await fetch(url);
+			const data = await response.json();
+			if (!data.routes || data.routes.length === 0) return;
+
+			const route = data.routes[0].geometry;
+
+			map.getSource('lines-source').setData({
+				type: "FeatureCollection",
+				features: [{ type: "Feature", geometry: route }]
+			});
+
+			const distanceKm = (data.routes[0].distance / 1000).toFixed(2); // meters to km
+
+			new mapboxgl.Popup()
+				.setLngLat(start)
+				.setHTML(`<strong>${station.properties.NAME}</strong><br>Distance to UW: ${distanceKm} km`)
+				.addTo(map);
+
+			map.easeTo({ center: start, zoom: 13 });
+
+		} catch (err) {
+			console.error("Error fetching walking route:", err);
+		}
+	});
+
+	document.getElementById("transitBtn").addEventListener("click", () => {
+				const uw = map.getLayoutProperty("uw-campus-layer", "visibility");	
+        const lightrail = map.getLayoutProperty("lightrail-layer", "visibility");
+        const newVisibility = lightrail === "none" ? "visible" : "none";
+				const newUWVisibility = uw === "none" ? "visible" : "none";
+        map.setLayoutProperty("lightrail-layer", "visibility", newVisibility);
+				map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);	
+    });
 });
 
 

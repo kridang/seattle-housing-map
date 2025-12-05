@@ -99,10 +99,14 @@ body {
 
 /* LEGEND */
 .legend-item {
-	display: flex;
-	align-items: center;
+	/* display: flex; */
+	/* align-items: center; */
 	margin-bottom: 8px;
 	font-size: 14px;
+}
+
+.legend-item .sub-legend {
+	margin-left: 50px;
 }
 
 .legend-color {
@@ -111,6 +115,18 @@ body {
 	margin-right: 8px;
 	display: inline-block;
 	border-radius: 4px;
+}
+
+.legend-color.green { 
+	background-color: #2ecc71; 
+}
+
+.legend-color.yellow { 
+	background-color: #f1c40f; 
+}
+
+.legend-color.red { 
+	background-color: #e74c3c; 
 }
 
 .legend-color.purple { 
@@ -130,12 +146,12 @@ body {
 }
 
 /* QUESTION MARK BUTTON */
-#help-button {
+/* #help-button {
 	border-radius: 50%;
 	width: 28px;
 	height: 28px;
 	cursor: pointer;
-}
+} */
 
 #popup {
 	position: fixed;
