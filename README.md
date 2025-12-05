@@ -28,10 +28,9 @@ The goal of this project is to provide an intuitive tool for UW students and you
 ## Map Preview
 
 
-- **Overview Map:** Shows housing affordability and median rent across Seattle.  
+- **Overview Map:** Shows housing affordability, MHA Zones, transit, and crime across Greater Seattle.  
 - **Crime Clusters:** Visualizes crime incidents using clusters to reduce clutter.  
 - **Transit Access:** Highlights areas within walking distance of bus and Link stations.  
-- **Pop-ups:** Detailed neighborhood information including rent, crime, and transit access.  
 
 ***
 
@@ -54,10 +53,9 @@ The goal of this project is to provide an intuitive tool for UW students and you
 ## Main Functions / Filters
 - **Price Filter:** Select desired rent range to highlight affordable neighborhoods  
 - **Crime Filter:** Show areas with low or high crime density  
-- **Transit Proximity:** Highlight areas within walking distance to bus or Link stations  
-- **Interactive Pop-ups:** Display neighborhood details, rent statistics, crime info, and transit access  
+- **Transit Proximity:** Highlight walking distance to bus or Link stations from UW
+- **Interactive Pop-ups:** Display neighborhood details, crime info, and transit access, walking distances  
 - **Choropleth & Cluster Layers:** Visualize rent distribution and crime points efficiently  
-- **Sidebar Charts:** Summarize rent affordability, percentage of rent-burdened households, and transit access  
 
 ***
 
@@ -74,7 +72,7 @@ ChatGPT was used to produce the favicon for this project. It was also used to he
 ***
 
 ## Other Notes
-- The map is designed to work on most desktop and laptop screens
+- The map is designed to work on desktop and laptop screens
 - Future improvements may include user accounts, bookmarking favorite neighborhoods, and additional interactive filters for amenities.
 - Limitation: This data reflects reported crimes in Seattle over the last five years. Not all incidents are reported, and patterns may be influenced by policing practices, neighborhood demographics, and other systemic factors.
 
