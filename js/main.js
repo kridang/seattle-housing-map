@@ -46,6 +46,12 @@ map.on('load', async () => {
 			'fill-opacity': 0.40,
 			'fill-outline-color': '#d48aa3'  
 		}
+		layout: { visibility: 'visible' }
+	});
+    document.getElementById("mhaBtn").addEventListener("click", () => {
+    	const current = map.getLayoutProperty("mha-fill", "visibility");
+    	const newVis = current === "none" ? "visible" : "none";
+    	map.setLayoutProperty("mha-fill", "visibility", newVis);
 	});
 
 	document.getElementById("mhaBtn").addEventListener("click", () => {
