@@ -98,8 +98,8 @@ body {
 }
 
 .btn.active-btn {
-    background-color: #ffed4e !important;
-    color: black !important;
+    background-color: #ffed4e;
+    color: #111;
 }
 
 /* LEGEND */
