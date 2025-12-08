@@ -20,6 +20,18 @@ const map = new mapboxgl.Map({
 
 map.on('load', async () => {
 
+	function setButtonColor(buttonId, isVisible) {
+    const btn = document.getElementById(buttonId);
+    
+    if (!btn) return;
+
+    if (isVisible) {
+        btn.classList.add("active-btn");
+    } else {
+        btn.classList.remove("active-btn");
+    }
+}
+
     //for rent
     map.addSource('housing', {
         type: 'geojson',
@@ -84,13 +96,19 @@ map.on('load', async () => {
     });
 
     document.getElementById("priceBtn").addEventListener("click", () => {
-        const layers = ['housing-fill', 'housing-outline'];
-        layers.forEach(layer => {
-            const current = map.getLayoutProperty(layer, "visibility");
-            const newVis = current === "none" ? "visible" : "none";
-            map.setLayoutProperty(layer, "visibility", newVis);
-        });
+    const layers = ['housing-fill', 'housing-outline'];
+
+    // determine if button will be ON
+    const current = map.getLayoutProperty("housing-fill", "visibility");
+    const willBeVisible = current === "none"; // if currently hidden ⇒ we're turning ON
+
+    layers.forEach(layer => {
+        map.setLayoutProperty(layer, "visibility", willBeVisible ? "visible" : "none");
     });
+
+    // update button styling
+    setButtonColor("priceBtn", willBeVisible);
+});
 
    // for mha
 	map.addSource('mha-zones', {
@@ -110,10 +128,17 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("mhaBtn").addEventListener("click", () => {
-			const current = map.getLayoutProperty("mha-fill", "visibility");
-			const newVis = current === "none" ? "visible" : "none";
-			map.setLayoutProperty("mha-fill", "visibility", newVis);
-  });
+		const layers = ['mha-fill'];
+
+		const current = map.getLayoutProperty("mha-fill", "visibility");
+		const willBeVisible = current === "none";
+
+		layers.forEach(layer => {
+			map.setLayoutProperty(layer, "visibility", willBeVisible ? "visible" : "none");
+		});
+
+		setButtonColor("mhaBtn", willBeVisible);
+});
 
   // for bus
   const transitResp = await fetch('data/transit.geojson');
@@ -186,11 +211,18 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("busBtn").addEventListener("click", () => {
-    const current = map.getLayoutProperty("transit-layer", "visibility");
-    const newVisibility = current === "none" ? "visible" : "none";
-    map.setLayoutProperty("transit-layer", "visibility", newVisibility);
-	if (newVisibility === "none") hideRouteLine();
+		const layers = ['transit-layer'];
 
+		const current = map.getLayoutProperty("transit-layer", "visibility");
+		const willBeVisible = current === "none";
+
+		layers.forEach(layer => {
+			map.setLayoutProperty(layer, "visibility", willBeVisible ? "visible" : "none");
+		});
+
+		if (!willBeVisible) hideRouteLine();
+
+		setButtonColor("busBtn", willBeVisible);
 	});
 
 	function hideRouteLine() {
@@ -274,14 +306,18 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("crimeBtn").addEventListener("click", () => {
-    	const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
+		const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
 
-    	layers.forEach(layer => {
-        	const current = map.getLayoutProperty(layer, 'visibility');
-        	const newVis = current === 'none' ? 'visible' : 'none';
-        	map.setLayoutProperty(layer, 'visibility', newVis);
-    	});
+		const current = map.getLayoutProperty("crime-clusters", "visibility");
+		const willBeVisible = current === "none";
+
+		layers.forEach(layer => {
+			map.setLayoutProperty(layer, "visibility", willBeVisible ? "visible" : "none");
+		});
+
+		setButtonColor("crimeBtn", willBeVisible);
 	});
+
 	
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
@@ -363,12 +399,18 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("transitBtn").addEventListener("click", () => {
-		const uw = map.getLayoutProperty("uw-campus-layer", "visibility");	
-        const lightrail = map.getLayoutProperty("lightrail-layer", "visibility");
-        const newVisibility = lightrail === "none" ? "visible" : "none";
-		const newUWVisibility = uw === "none" ? "visible" : "none";
-        map.setLayoutProperty("lightrail-layer", "visibility", newVisibility);
-		map.setLayoutProperty("uw-campus-layer", "visibility", newUWVisibility);
-		if (newVisibility === "none") hideRouteLine();
-    });
+		const layers = ['lightrail-layer', 'uw-campus-layer'];
+
+		const current = map.getLayoutProperty("lightrail-layer", "visibility");
+		const willBeVisible = current === "none";
+
+		layers.forEach(layer => {
+			map.setLayoutProperty(layer, "visibility", willBeVisible ? "visible" : "none");
+		});
+
+		if (!willBeVisible) hideRouteLine();
+
+		setButtonColor("transitBtn", willBeVisible);
+	});
+
 });

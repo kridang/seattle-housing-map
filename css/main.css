@@ -97,6 +97,11 @@ body {
 	color: #111;
 }
 
+.btn.active-btn {
+    background-color: #ffed4e !important;
+    color: black !important;
+}
+
 /* LEGEND */
 .legend-item {
 	/* display: flex; */
