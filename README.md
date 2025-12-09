@@ -38,7 +38,7 @@ The goal of this project is to provide an intuitive tool for UW students and you
 - **Apartment Market Rent Prices (2024)** – U.S. Census Tract level: [Catalog Data](https://catalog.data.gov/dataset/apartment-market-rent-prices-by-census-tract)  
 - **Mandatory Housing Affordability Zones** – Seattle City GIS: [MHA Zones](https://data-seattlecitygis.opendata.arcgis.com/datasets/mandatory-housing-affordability-mha-zones/explore)  
 - **SPD Crime Data (2008–Present)** – Seattle Open Data: [Crime Data](https://data.seattle.gov/Public-Safety/SPD-Crime-Data-2008-Present/tazs-3rd5/about_data)  
-- **Transit Stops & Walksheds** – Half-mile walkshed from frequent stops: [Transit Data](https://data.seattle.gov/dataset/Frequent-Transit-Stop-Half-Mile-Walksheds-Interim-/w6b7-awkr/about_data)
+- **Transit Bus Stops** – Half-mile walkshed from frequent stops: [Transit Data](https://www.soundtransit.org/help-contacts/business-information/open-transit-data-otd/otd-downloads)
 - **Transit Lightrail** – Half-mile walkshed from frequent stops: [Transit Data](https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::light-rail-stations-1/explore)
 
 ***
