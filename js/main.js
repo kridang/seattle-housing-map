@@ -313,7 +313,6 @@ map.on('load', async () => {
 
 		setButtonColor("crimeBtn", willBeVisible);
 	});
-
 	
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
