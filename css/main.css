@@ -151,23 +151,23 @@ body {
 }
 
 .legend-color.crime-low {
-  background-color: #7FB3D5;    
+  background-color: #e0f2fe;    
 }
 
 .legend-color.crime-lowmed {
-  background-color: #48C9B0;  
+  background-color: #bae6fd;  
 }
 
 .legend-color.crime-med {
-  background-color: #F4D03F; 
+  background-color: #7dd3fc; 
 }
 
 .legend-color.crime-high {
-  background-color: #E67E22;  
+  background-color: #38bdf8;  
 }
 
 .legend-color.crime-veryhigh {
-  background-color: #E74C3C; 
+  background-color: #0284c7; 
 }
 
 /* ABOUT PAGE */

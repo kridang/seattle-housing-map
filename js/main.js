@@ -19,19 +19,6 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', async () => {
-
-	function setButtonColor(buttonId, isVisible) {
-    const btn = document.getElementById(buttonId);
-    
-    if (!btn) return;
-
-    if (isVisible) {
-        btn.classList.add("active-btn");
-    } else {
-        btn.classList.remove("active-btn");
-    }
-}
-
     //for rent
     map.addSource('housing', {
         type: 'geojson',
@@ -247,11 +234,11 @@ map.on('load', async () => {
         	'circle-color': [
             	'step',
             	['get', 'point_count'],
-            	'lightblue',   
-            	50, 'teal',  
-            	100, 'yellow', 
-				200, 'orange',
-				400, 'red'
+            	'#e0f2fe',   
+            	50, '#bae6fd',  
+            	100, '#7dd3fc', 
+				200, '#38bdf8',
+				400, '#0284c7'
         	],
         	'circle-radius': [
             	'step',
@@ -413,4 +400,16 @@ map.on('load', async () => {
 		setButtonColor("transitBtn", willBeVisible);
 	});
 
+	// for active legend buttons
+	function setButtonColor(buttonId, isVisible) {
+    const btn = document.getElementById(buttonId);
+    
+    if (!btn) return;
+
+    if (isVisible) {
+        btn.classList.add("active-btn");
+    } else {
+        btn.classList.remove("active-btn");
+    }
+	}
 });
