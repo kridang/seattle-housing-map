@@ -405,16 +405,46 @@ map.on('load', async () => {
 		setButtonColor("transitBtn", willBeVisible);
 	});
 
-	// for active legend buttons
-	function setButtonColor(buttonId, isVisible) {
-    const btn = document.getElementById(buttonId);
-    
-    if (!btn) return;
+	   // for active legend buttons
+    function setButtonColor(buttonId, isVisible) {
+        const btn = document.getElementById(buttonId);
+        
+        if (!btn) return;
 
-    if (isVisible) {
-        btn.classList.add("active-btn");
-    } else {
-        btn.classList.remove("active-btn");
+        if (isVisible) {
+            btn.classList.add("active-btn");
+        } else {
+            btn.classList.remove("active-btn");
+        }
     }
-	}
-});
+
+    const visibleOnLoad = ['housing-fill', 'housing-outline'];
+    const hiddenOnLoad = [
+        'mha-fill',
+        'transit-layer',
+        'crime-clusters',
+        'crime-cluster-count',
+        'crime-unclustered',
+        'lightrail-layer',
+        'uw-campus-layer',
+        'lines-layer'
+    ];
+
+    visibleOnLoad.forEach(id => {
+        if (map.getLayer(id)) {
+            map.setLayoutProperty(id, 'visibility', 'visible');
+        }
+    });
+
+    hiddenOnLoad.forEach(id => {
+        if (map.getLayer(id)) {
+            map.setLayoutProperty(id, 'visibility', 'none');
+        }
+    });
+
+    setButtonColor('priceBtn', true); 
+    ['mhaBtn', 'busBtn', 'crimeBtn', 'transitBtn'].forEach(id => {
+        setButtonColor(id, false);     
+    });
+
+}); 
