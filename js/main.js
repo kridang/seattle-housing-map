@@ -137,6 +137,7 @@ map.on('load', async () => {
 		id: 'transit-layer',
 		type: 'circle',
 		source: 'transit',
+		layout: { visibility: 'none' },
 		paint: {
 			'circle-radius': 4,
 			'circle-color': '#919090',
@@ -315,6 +316,7 @@ map.on('load', async () => {
 		id: 'lightrail-layer',
 		type: 'circle',
 		source: 'lightrail',
+		layout: { visibility: 'none' },
 		paint: {
 				'circle-radius': 7,
 				'circle-color': 'yellow',
