@@ -239,10 +239,13 @@ map.on('load', async () => {
 	});
 
 	map.addLayer({
-    	id: 'crime-clusters',
+    	id: 'crime-clusters-blue',
     	type: 'circle',
     	source: 'crime',
     	filter: ['has', 'point_count'],
+		layout: {
+        	'visibility': 'none'
+    	},
     	paint: {
         	'circle-color': [
             	'step',
@@ -262,10 +265,13 @@ map.on('load', async () => {
 	});
 
 	map.addLayer({
-    	id: 'crime-cluster-count',
+    	id: 'crime-cluster-count-blue',
     	type: 'symbol',
     	source: 'crime',
     	filter: ['has', 'point_count'],
+		layout: {
+        	'visibility': 'none'
+    	},
     	layout: {
      		'text-field': '{point_count_abbreviated}',
         	'text-size': 12
@@ -273,10 +279,13 @@ map.on('load', async () => {
 	});
 
 	map.addLayer({
-    	id: 'crime-unclustered',
+    	id: 'crime-unclustered-blue',
     	type: 'circle',
     	source: 'crime',
     	filter: ['!', ['has', 'point_count']],
+		layout: {
+        	'visibility': 'none'
+    	},
     	paint: {
         	'circle-color': 'black',
         	'circle-radius': 5,
@@ -302,9 +311,9 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("crimeBtn").addEventListener("click", () => {
-		const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
+		const layers = ['crime-clusters-blue','crime-cluster-count-blue','crime-unclustered-blue'];
 
-		const current = map.getLayoutProperty("crime-clusters", "visibility");
+		const current = map.getLayoutProperty("crime-clusters-blue", "visibility");
 		const willBeVisible = current === "none";
 
 		layers.forEach(layer => {
