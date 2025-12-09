@@ -226,48 +226,51 @@ map.on('load', async () => {
 	});
 
 	map.addLayer({
-    	id: 'crime-clusters',
+    	id: 'crime-clusters-blue',
     	type: 'circle',
     	source: 'crime',
     	filter: ['has', 'point_count'],
+		layout: {
+        	'visibility': 'none'
+    	},
     	paint: {
         	'circle-color': [
             	'step',
             	['get', 'point_count'],
-            	'#e0f2fe',   
-            	50, '#bae6fd',  
-            	100, '#7dd3fc', 
-				200, '#38bdf8',
-				400, '#0284c7'
+        			'#D6EAF8', 
+       				 50, '#5DADE2', 
+       				 200, '#1B4F72' 
         	],
         	'circle-radius': [
             	'step',
             	['get', 'point_count'],
-            	15,
-            	50, 20,
-            	100, 28,
-				200, 34,
-				400, 40
+        			15,
+        			50, 22,
+        			200, 30
         	]
     	}
 	});
 
 	map.addLayer({
-    	id: 'crime-cluster-count',
+    	id: 'crime-cluster-count-blue',
     	type: 'symbol',
     	source: 'crime',
     	filter: ['has', 'point_count'],
     	layout: {
+			'visibility': 'none',
      		'text-field': '{point_count_abbreviated}',
         	'text-size': 12
     	}
 	});
 
 	map.addLayer({
-    	id: 'crime-unclustered',
+    	id: 'crime-unclustered-blue',
     	type: 'circle',
     	source: 'crime',
     	filter: ['!', ['has', 'point_count']],
+		layout: {
+        	'visibility': 'none'
+    	},
     	paint: {
         	'circle-color': 'black',
         	'circle-radius': 5,
@@ -276,9 +279,9 @@ map.on('load', async () => {
     	}
 	});
 
-	map.on('click', 'crime-clusters', (e) => {
+	map.on('click', 'crime-clusters-blue', (e) => {
     	const features = map.queryRenderedFeatures(e.point, {
-        	layers: ['crime-clusters']
+        	layers: ['crime-clusters-blue']
     	});
 
     	const clusterId = features[0].properties.cluster_id;
@@ -293,9 +296,9 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("crimeBtn").addEventListener("click", () => {
-		const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
+		const layers = ['crime-clusters-blue','crime-cluster-count-blue','crime-unclustered-blue'];
 
-		const current = map.getLayoutProperty("crime-clusters", "visibility");
+		const current = map.getLayoutProperty("crime-clusters-blue", "visibility");
 		const willBeVisible = current === "none";
 
 		layers.forEach(layer => {
