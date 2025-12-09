@@ -269,10 +269,8 @@ map.on('load', async () => {
     	type: 'symbol',
     	source: 'crime',
     	filter: ['has', 'point_count'],
-		layout: {
-        	'visibility': 'none'
-    	},
     	layout: {
+			'visibility': 'none'
      		'text-field': '{point_count_abbreviated}',
         	'text-size': 12
     	}
@@ -294,9 +292,9 @@ map.on('load', async () => {
     	}
 	});
 
-	map.on('click', 'crime-clusters', (e) => {
+	map.on('click', 'crime-clusters-blue', (e) => {
     	const features = map.queryRenderedFeatures(e.point, {
-        	layers: ['crime-clusters']
+        	layers: ['crime-clusters-blue']
     	});
 
     	const clusterId = features[0].properties.cluster_id;
