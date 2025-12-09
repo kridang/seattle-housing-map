@@ -51,7 +51,7 @@ The goal of this project is to provide an intuitive tool for UW students and you
 ***
 
 ## Main Functions / Filters
-- **Price Filter:** Select desired rent range to highlight affordable neighborhoods  
+- **Price Filter:** Show rent range to highlight affordable neighborhoods  
 - **Crime Filter:** Show areas with low or high crime density  
 - **Transit Proximity:** Highlight walking distance to bus or Link stations from UW
 - **Interactive Pop-ups:** Display neighborhood details, crime info, and transit access, walking distances  
