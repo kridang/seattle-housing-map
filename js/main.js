@@ -19,19 +19,6 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', async () => {
-
-	function setButtonColor(buttonId, isVisible) {
-    const btn = document.getElementById(buttonId);
-    
-    if (!btn) return;
-
-    if (isVisible) {
-        btn.classList.add("active-btn");
-    } else {
-        btn.classList.remove("active-btn");
-    }
-}
-
     //for rent
     map.addSource('housing', {
         type: 'geojson',
@@ -239,51 +226,48 @@ map.on('load', async () => {
 	});
 
 	map.addLayer({
-    	id: 'crime-clusters-blue',
+    	id: 'crime-clusters',
     	type: 'circle',
     	source: 'crime',
     	filter: ['has', 'point_count'],
-		layout: {
-        	'visibility': 'none'
-    	},
     	paint: {
         	'circle-color': [
             	'step',
             	['get', 'point_count'],
-        			'#D6EAF8', 
-       				 50, '#5DADE2', 
-       				 200, '#1B4F72' 
+            	'#e0f2fe',   
+            	50, '#bae6fd',  
+            	100, '#7dd3fc', 
+				200, '#38bdf8',
+				400, '#0284c7'
         	],
         	'circle-radius': [
             	'step',
             	['get', 'point_count'],
-        			15,
-        			50, 22,
-        			200, 30
+            	15,
+            	50, 20,
+            	100, 28,
+				200, 34,
+				400, 40
         	]
     	}
 	});
 
 	map.addLayer({
-    	id: 'crime-cluster-count-blue',
+    	id: 'crime-cluster-count',
     	type: 'symbol',
     	source: 'crime',
     	filter: ['has', 'point_count'],
     	layout: {
-			'visibility': 'none'
      		'text-field': '{point_count_abbreviated}',
         	'text-size': 12
     	}
 	});
 
 	map.addLayer({
-    	id: 'crime-unclustered-blue',
+    	id: 'crime-unclustered',
     	type: 'circle',
     	source: 'crime',
     	filter: ['!', ['has', 'point_count']],
-		layout: {
-        	'visibility': 'none'
-    	},
     	paint: {
         	'circle-color': 'black',
         	'circle-radius': 5,
@@ -292,9 +276,9 @@ map.on('load', async () => {
     	}
 	});
 
-	map.on('click', 'crime-clusters-blue', (e) => {
+	map.on('click', 'crime-clusters', (e) => {
     	const features = map.queryRenderedFeatures(e.point, {
-        	layers: ['crime-clusters-blue']
+        	layers: ['crime-clusters']
     	});
 
     	const clusterId = features[0].properties.cluster_id;
@@ -309,9 +293,9 @@ map.on('load', async () => {
 	});
 
 	document.getElementById("crimeBtn").addEventListener("click", () => {
-		const layers = ['crime-clusters-blue','crime-cluster-count-blue','crime-unclustered-blue'];
+		const layers = ['crime-clusters', 'crime-cluster-count', 'crime-unclustered'];
 
-		const current = map.getLayoutProperty("crime-clusters-blue", "visibility");
+		const current = map.getLayoutProperty("crime-clusters", "visibility");
 		const willBeVisible = current === "none";
 
 		layers.forEach(layer => {
@@ -320,6 +304,7 @@ map.on('load', async () => {
 
 		setButtonColor("crimeBtn", willBeVisible);
 	});
+
 	
 	// for lightrail
 	const lightrailResp = await fetch('data/clean_lightrail.geojson');
@@ -415,4 +400,16 @@ map.on('load', async () => {
 		setButtonColor("transitBtn", willBeVisible);
 	});
 
+	// for active legend buttons
+	function setButtonColor(buttonId, isVisible) {
+    const btn = document.getElementById(buttonId);
+    
+    if (!btn) return;
+
+    if (isVisible) {
+        btn.classList.add("active-btn");
+    } else {
+        btn.classList.remove("active-btn");
+    }
+	}
 });

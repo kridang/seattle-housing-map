@@ -30,7 +30,7 @@ The goal of this project is to provide an intuitive tool for UW students and you
 
 - **Overview Map:** Shows housing affordability, MHA Zones, transit, and crime across Greater Seattle.  
 - **Crime Clusters:** Visualizes crime incidents using clusters to reduce clutter.  
-- **Transit Access:** Highlights areas within walking distance of bus and Link stations.  
+- **Transit Access:** Highlights areas within walking distance of bus and Link stations. Hights distance between lightrail and UW Campus.
 
 ***
 
@@ -38,8 +38,8 @@ The goal of this project is to provide an intuitive tool for UW students and you
 - **Apartment Market Rent Prices (2024)** – U.S. Census Tract level: [Catalog Data](https://catalog.data.gov/dataset/apartment-market-rent-prices-by-census-tract)  
 - **Mandatory Housing Affordability Zones** – Seattle City GIS: [MHA Zones](https://data-seattlecitygis.opendata.arcgis.com/datasets/mandatory-housing-affordability-mha-zones/explore)  
 - **SPD Crime Data (2008–Present)** – Seattle Open Data: [Crime Data](https://data.seattle.gov/Public-Safety/SPD-Crime-Data-2008-Present/tazs-3rd5/about_data)  
-- **Housing Tenure and Costs** – Seattle Neighborhoods: [Tenure & Costs](https://data.seattle.gov/dataset/Housing-Tenure-and-Costs-Seattle-Neighborhoods/a5mu-b2ub/about_data)  
-- **Transit Stops & Walksheds** – Half-mile walkshed from frequent stops: [Transit Data](https://data.seattle.gov/dataset/Frequent-Transit-Stop-Half-Mile-Walksheds-Interim-/w6b7-awkr/about_data)  
+- **Transit Stops & Walksheds** – Half-mile walkshed from frequent stops: [Transit Data](https://data.seattle.gov/dataset/Frequent-Transit-Stop-Half-Mile-Walksheds-Interim-/w6b7-awkr/about_data)
+- **Transit Lightrail** – Half-mile walkshed from frequent stops: [Transit Data](https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::light-rail-stations-1/explore)
 
 ***
 
@@ -73,6 +73,6 @@ ChatGPT was used to produce the favicon for this project. It was also used to he
 
 ## Other Notes
 - The map is designed to work on desktop and laptop screens
-- Future improvements may include user accounts, bookmarking favorite neighborhoods, and additional interactive filters for amenities.
-- Limitation: This data reflects reported crimes in Seattle over the last five years. Not all incidents are reported, and patterns may be influenced by policing practices, neighborhood demographics, and other systemic factors.
-
+- Future improvements may include user accounts, bookmarking favorite neighborhoods, filtering bus stops, and additional interactive filters for amenities.
+- Limitation: This data reflects reported crimes in Seattle over the last year. Not all incidents are reported, and patterns may be influenced by policing practices, neighborhood demographics, and other systemic factors.
+- Limitation: This map displays bus stop locations as points, but does not encode route paths or service frequency. The visualization assumes that users have prior knowledge of how individual bus stops connect into routes and how service operates beyond stop locations.  
